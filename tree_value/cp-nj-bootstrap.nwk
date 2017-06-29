@@ -1,0 +1,132 @@
+#NEXUS 
+
+Begin trees;  [Treefile saved Sun Sep 18 09:52:54 2016]
+[!
+>Data file = cp-naked.nex
+>Bootstrap method with heuristic search:
+>  Number of bootstrap replicates = 1000
+>  Starting seed = generated automatically
+>  Number of characters resampled in each replicate = 141128
+>  Optimality criterion = distance (unweighted least squares (power=0))
+>    Negative branch lengths allowed, but set to zero for tree-score calculation
+>    Distance measure = uncorrected ("p")
+>  Starting tree(s) obtained via neighbor-joining
+>  Branch-swapping algorithm: tree-bisection-reconnection (TBR) with reconnection limit = 8
+>    Steepest descent option not in effect
+>  Initial 'Maxtrees' setting = 100
+>  Zero-length branches not collapsed
+>  'MulTrees' option in effect
+>  No topological constraints in effect
+>  Trees are unrooted
+>
+>  1000 bootstrap replicates completed
+>  Time used = 03:31:55 (CPU time = 03:31:53.4)
+]
+	Translate
+		1 001Chikusichloa_mutica_BOP022684,
+		2 001Chikusichloa_aquatica_KR078265_1,
+		3 002Zizania_aquatica_BOP022691,
+		4 002Zizania_latifolia_BOP022692,
+		5 002Zizania_aquatica_KJ870999_1,
+		6 002Zizania_latifolia_KT161956_1,
+		7 003Leersia_hexandra_BOP022685,
+		8 003Leersia_perrieri_BOP022686,
+		9 003Leersia_tisserantti_BOP022687,
+		10 003Leersia_tisserantii_JN415112_1,
+		11 01O_brachyantha_BOP022653,
+		12 01O_brachyantha_BOP022654,
+		13 01O_brachyantha_KT992850_1,
+		14 02O_australiensis_BOP022647,
+		15 02O_australiensis_BOP022648,
+		16 02O_australiensis_BOP022649,
+		17 02O_australiensis_KJ830774_1,
+		18 03O_officinalis_BOP022672,
+		19 03O_officinalis_BOP022673,
+		20 03O_officinalis_BOP022674,
+		21 03O_officinalis_BOP022700,
+		22 03O_officinalis_KM881643_1,
+		23 04O_minuta_BOP022669,
+		24 04O_minuta_BOP022670,
+		25 04O_minuta_KU179220_1,
+		26 04O_punctata,
+		27 04O_punctata_BOP022675,
+		28 04O_punctata_BOP022676,
+		29 04O_punctata_BOP022677,
+		30 04O_punctata_BOP022678,
+		31 04O_punctata_BOP022679,
+		32 04O_punctata_KM103375_1,
+		33 05O_longistaminata,
+		34 05O_longistaminata_KM088024_1,
+		35 05O_longistaminata_KM881641_1,
+		36 06O_glumipatula,
+		37 06O_glumipatula_BOP022658,
+		38 06O_glumipatula_KM881640_1,
+		39 06O_glumipatula_KR364803_1,
+		40 07O_meridionalis_BOP022667,
+		41 07O_meridionalis_BOP022668,
+		42 07O_meridionalis_JN005831_1,
+		43 07O_meridionalis_KM103373_1,
+		44 08O_glumipatula_KR364802_1,
+		45 09O_barthii,
+		46 09O_barthii_BOP022650,
+		47 09O_barthii_BOP022651,
+		48 09O_barthii_BOP022652,
+		49 09O_barthii_KM088023_1,
+		50 09O_barthii_KM103378_1,
+		51 09O_barthii_KM881636_1,
+		52 12O_glaberrima_KM103370_1,
+		53 12O_glaberrima_KM881638_1,
+		54 13O_nivara_BOP022698,
+		55 13O_nivara_BOP022699,
+		56 13O_nivara_AP006728_1,
+		57 13O_nivara_KM088022_1,
+		58 13O_nivara_NC005973_1,
+		59 14O_sativa_Indica_JN861109_1,
+		60 14O_sativa_Indica_KU705873_1,
+		61 14O_sativa_indica_NC008155,
+		62 15O_rufipogon_JN005832_1,
+		63 16O_rufipogon_BOP022682,
+		64 16O_rufipogon_BOP022696,
+		65 16O_rufipogon_BOP022697,
+		66 16O_rufipogon_DongXiang_KF562709_1,
+		67 16O_rufipogon_NC017835_1,
+		68 17O_glaberrima_KM881639_1,
+		69 18O_sativa_Japonica_AY522330_1,
+		70 18O_sativa_Japonica_GU592207_1,
+		71 18O_sativa_japonica_NC00132,
+		72 a1O_granulata,
+		73 a1O_meyeriana,
+		74 a2O_granulata_BOP022659,
+		75 a2O_granulata_BOP022660,
+		76 a2O_granulata_BOP022661,
+		77 a3O_neocaledonica,
+		78 a3O_neocalidonia_BOP022671,
+		79 a5O_longiglumis,
+		80 a5O_longiglumis_BOP022664,
+		81 a5O_longiglumis_BOP022665,
+		82 a5O_longiglumis_BOP022666,
+		83 a6O_ridleyi,
+		84 a6O_ridleyi_BOP022680,
+		85 a6O_ridleyi_BOP022681,
+		86 b7O_coarctata,
+		87 b7O_coarctata_BOP022690,
+		88 b8O_schlechteri,
+		89 b8O_schlechteri_BOP022683,
+		90 d10O_latifolia,
+		91 d10O_latifolia_BOP022662,
+		92 d11O_alta,
+		93 d11O_alta_BOP022645,
+		94 d11O_grandglumis_BOP022694,
+		95 d11O_grandglumis_BOP022695,
+		96 d11O_grandiglumis,
+		97 d11O_latifolia_BOP022663,
+		98 d12O_rhizomatis,
+		99 d16O_alta_BOP022646,
+		100 d16O_eichingeri,
+		101 d16O_eichingeri_BOP022655,
+		102 d16O_eichingeri_BOP022656,
+		103 e17O_malampuzhaensis,
+		104 f21O_glumipatula_BOP022657
+		;
+tree 'PAUP_1' = [&U] (1:100,2:100,((((3:100,4:100):76.1,5:100):99.3,6:100):100,((((7:100,8:100):100,9:100):58.5,10:100):100,(((((11:100,12:100):100,13:100):97.6,((79:100,80:100,81:100,82:100,(84:100,85:100):58):91.6,83:100):100):63.8,((72:100,(((74:100,(75:100,76:100):63.45):68.2,78:100):86.6,77:100):64.8):91.7,73:100):99):99,(((((14:100,15:100):75.5,16:100):98.8,17:100):89.4,((((((18:100,20:100):89.1,21:100):58.3,19:100,(23:100,91:100):80.9,(29:100,31:100):85.1,30:100,90:100,92:100,93:100,94:100,95:100,96:100,97:100,98:100,(99:100,(101:100,102:100):91.367):61.7,100:100):65.5,26:100):68.8,22:100):64.5,(((((24:100,27:100,28:100):76.7,103:100):77.8,25:100):100,32:100):99.3,((33:100,36:100,37:100,40:100,41:100,42:100,43:100,44:100,45:100,(46:100,48:100,104:100):54.3,47:100,49:100,50:100,51:100,52:100,53:100,54:100,(55:100,64:100,65:100):53.1,56:100,57:100,58:100,59:100,60:100,61:100,62:100,63:100,66:100,67:100,68:100,69:100,70:100,71:100):51.2,34:100,35:100,38:100,39:100):100):90.4):61.3,88:100):62.5,((86:100,87:100):74.2,89:100):62.8):99.2):100):100):71.3);
+End;
