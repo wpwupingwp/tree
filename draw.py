@@ -11,9 +11,6 @@ except:
     except:
         raise Exception('File not recognized.')
 b = a.get_terminals()
-for i,j in enumerate(b):
-    #j.name = 'node{}'.format(i)
-    j.name = ''
 b_l = len(b)
 c = a.get_nonterminals()
 c_l = len(c)
