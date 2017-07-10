@@ -1,23 +1,42 @@
 #!/usr/bin/python3
 
+import argparse
+import os
+from timeit import default_timer as timer
 from Bio import Phylo as p
-from sys import argv
-try:
-    a = p.read(argv[1], 'newick')
-except:
-    try:
-        a = p.read(argv[1], 'nexus')
-    except:
-        raise Exception('File not recognized.')
-b = a.get_terminals()
-b_l = len(b)
-c = a.get_nonterminals()
-c_l = len(c)
-p.draw(a)
-print('{}\t\t{:.3f}'.format(argv[1], c_l/b_l))
 
-# with open(argv[1], 'r') as raw:
-#     data = raw.read()
-# node = data.count(',') + 1
-# node2 = data.count('(')
-# print('{}\t{:.3f}\t{:.3f}'.format(argv[1], c_l/b_l, node2/node))
+
+def get_format(filename):
+    with open(filename, 'r') as raw:
+        line = raw.readline()
+        if line.startswith('#NEXUS'):
+            return 'nexus'
+        elif line.startswith('('):
+            return 'newick'
+        else:
+            raise ValueError('Unsupport format!')
+
+
+def parse_args():
+    arg = argparse.ArgumentParser(description=main.__doc__)
+    arg.add_argument('-o', '--out', default='out',
+                     help='output directory')
+    arg.print_help()
+    return arg.parse_args()
+
+
+def main():
+    """docstring
+    """
+    start = timer()
+    arg = parse_args()
+    # start here
+    if not os.path.exists(arg.out):
+        os.mkdir(arg.out)
+    function()
+    end = timer()
+    print('Cost {:.3f} seconds.'.format(end-start))
+
+
+if __name__ == '__main__':
+    main()
