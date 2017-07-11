@@ -2,6 +2,7 @@
 
 import argparse
 import re
+from copy import deepcopy
 from timeit import default_timer as timer
 from Bio import Phylo as p
 
@@ -27,12 +28,15 @@ def get_bootstrap(clade):
 
 def collapse(arg):
     tree = p.read(arg.input, get_format(arg.input))
+    old_tree = deepcopy(tree)
     inner_node = tree.get_nonterminal()
     short_branch = [i for i in inner_node if i.branch_length < arg.lmin]
     long_branch = [i for i in inner_node if i.branch_length > arg.lmax]
     doubt_clade = [i for i in inner_node if get_bootstrap(i) < arg.bmin]
     for clade in short_branch, long_branch, doubt_clade:
-        tree.collapse(clade)
+        old_tree.collapse(clade)
+        clade.color = 'red'
+    p.draw(tree)
     p.write(tree, arg.output, 'newick')
 
 
