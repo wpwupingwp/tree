@@ -29,7 +29,7 @@ def get_bootstrap(clade):
 def collapse(arg):
     tree = p.read(arg.input, get_format(arg.input))
     old_tree = deepcopy(tree)
-    inner_node = tree.get_nonterminal()
+    inner_node = tree.get_nonterminals()
     short_branch = [i for i in inner_node if i.branch_length < arg.lmin]
     long_branch = [i for i in inner_node if i.branch_length > arg.lmax]
     doubt_clade = [i for i in inner_node if get_bootstrap(i) < arg.bmin]
