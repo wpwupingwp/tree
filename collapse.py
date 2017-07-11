@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 
 import argparse
-import os
 import re
 from timeit import default_timer as timer
+from Bio import Phylo as p
 
 
 def get_format(filename):
@@ -17,27 +17,34 @@ def get_format(filename):
             raise ValueError('Unsupport format!')
 
 
-def remove_alrt(arg):
-    if arg.alrt:
-        repl = r'\g<alrt>'
-    else:
-        repl = r'\g<bb>'
+def get_bootstrap(clade):
+    # if there is more than 1 bootstrap value, return lower one
+    comment = clade.comment
+    bootstrap_value = re.split(r'\W', comment)
+    bootstrap_value = [float(i) for i in bootstrap_value]
+    return min(bootstrap_value)
 
-    with open(arg.input, 'r') as raw:
-        old = raw.read()
-    new = re.sub(r'(?<=\))(?P<alrt>[\d\.]+)/(?P<bb>[\d\.]+)(?=:)',
-                 repl, old)
-    if arg.output is None:
-        arg.output = arg.input + '.new'
-    with open(arg.output, 'w') as output:
-        output.write(new)
+
+def collapse(arg):
+    tree = p.read(arg.input, get_format(arg.input))
+    inner_node = tree.get_nonterminal()
+    short_branch = [i for i in inner_node if i.branch_length < arg.lmin]
+    long_branch = [i for i in inner_node if i.branch_length > arg.lmax]
+    doubt_clade = [i for i in inner_node if get_bootstrap(i) < arg.bmin]
+    for clade in short_branch, long_branch, doubt_clade:
+        tree.collapse(clade)
+    return tree
 
 
 def parse_args():
     arg = argparse.ArgumentParser()
     arg.add_argument('input', help='input file')
-    arg.add_argument('-1', '--alrt', action='store_true',
-                     help='keep SH-like alrt value')
+    arg.add_argument('-lmin', type=float, default=0.001,
+                     help='minimum branch length')
+    arg.add_argument('-lmax', type=float, default=0.999,
+                     help='maximum branch length')
+    arg.add_argument('-bmin', type=float, default=50.0,
+                     help='minimum bootstrap value')
     arg.add_argument('-o', '--output', help='output file')
     arg.print_help()
     return arg.parse_args()
@@ -48,7 +55,8 @@ def main():
     """
     start = timer()
     arg = parse_args()
-    remove_alrt(arg)
+    tree = p.read()
+    collapse(arg, tree)
     end = timer()
     print('Cost {:.3f} seconds.'.format(end-start))
 
