@@ -33,7 +33,7 @@ def collapse(arg):
     doubt_clade = [i for i in inner_node if get_bootstrap(i) < arg.bmin]
     for clade in short_branch, long_branch, doubt_clade:
         tree.collapse(clade)
-    return tree
+    p.write(tree, arg.output, 'newick')
 
 
 def parse_args():
@@ -55,8 +55,7 @@ def main():
     """
     start = timer()
     arg = parse_args()
-    tree = p.read()
-    collapse(arg, tree)
+    collapse(arg)
     end = timer()
     print('Cost {:.3f} seconds.'.format(end-start))
 
