@@ -20,8 +20,10 @@ def get_format(filename):
 
 def get_bootstrap(clade):
     # if there is more than 1 bootstrap value, return lower one
-    comment = clade.comment
-    bootstrap_value = re.split(r'\W', comment)
+    if clade.confidence is not None:
+        bootstrap_value = clade.confidence
+    elif clade.name is not None:
+        bootstrap_value = re.split(r'\W', clade.name)
     bootstrap_value = [float(i) for i in bootstrap_value]
     return min(bootstrap_value)
 
@@ -30,6 +32,11 @@ def collapse(arg):
     tree = p.read(arg.input, get_format(arg.input))
     old_tree = deepcopy(tree)
     inner_node = tree.get_nonterminals()
+    # remove empty
+    inner_node = [i for i in inner_node if i.branch_length is not None]
+    for i in inner_node:
+        print(i.branch_length)
+    print(inner_node)
     short_branch = [i for i in inner_node if i.branch_length < arg.lmin]
     long_branch = [i for i in inner_node if i.branch_length > arg.lmax]
     doubt_clade = [i for i in inner_node if get_bootstrap(i) < arg.bmin]
