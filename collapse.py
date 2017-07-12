@@ -2,7 +2,6 @@
 
 import argparse
 import re
-from copy import deepcopy
 from timeit import default_timer as timer
 from Bio import Phylo as p
 
@@ -31,7 +30,6 @@ def get_bootstrap(clade):
 
 def collapse(arg):
     tree = p.read(arg.input, get_format(arg.input))
-    old_tree = deepcopy(tree)
     inner_node = tree.get_nonterminals()
     # remove empty
     inner_node = [i for i in inner_node if i.branch_length is not None]
@@ -42,10 +40,12 @@ def collapse(arg):
                 get_bootstrap(clade) < arg.bmin):
             to_remove.append(clade)
     for clade in to_remove:
-        #old_tree.collapse(clade)
         clade.color = 'red'
     p.draw(tree)
-    p.write(tree, arg.output, 'newick')
+    for clade in to_remove:
+        tree.collapse(clade)
+    p.draw(tree)
+    p.write(tree, arg.output, 'phyloxml')
 
 
 def parse_args():
@@ -67,6 +67,8 @@ def main():
     """
     start = timer()
     arg = parse_args()
+    if arg.output is None:
+        arg.output = '{}.collapse'.format(arg.input)
     collapse(arg)
     end = timer()
     print('Cost {:.3f} seconds.'.format(end-start))
