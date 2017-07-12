@@ -11,6 +11,8 @@ def get_format(filename):
         line = raw.readline()
         if line.startswith('#NEXUS'):
             return 'nexus'
+        elif line.startswith('<phyloxml'):
+            return 'phyloxml'
         elif line.startswith('('):
             return 'newick'
         else:
