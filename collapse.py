@@ -20,10 +20,11 @@ def get_format(filename):
 
 def get_bootstrap(clade):
     # if there is more than 1 bootstrap value, return lower one
+    bootstrap_value = list()
     if clade.confidence is not None:
-        bootstrap_value = clade.confidence
+        bootstrap_value.append(clade.confidence)
     elif clade.name is not None:
-        bootstrap_value = re.split(r'\W', clade.name)
+        bootstrap_value.extend(re.split(r'\W', clade.name))
     bootstrap_value = [float(i) for i in bootstrap_value]
     return min(bootstrap_value)
 
@@ -34,14 +35,14 @@ def collapse(arg):
     inner_node = tree.get_nonterminals()
     # remove empty
     inner_node = [i for i in inner_node if i.branch_length is not None]
-    for i in inner_node:
-        print(i.branch_length)
-    print(inner_node)
-    short_branch = [i for i in inner_node if i.branch_length < arg.lmin]
-    long_branch = [i for i in inner_node if i.branch_length > arg.lmax]
-    doubt_clade = [i for i in inner_node if get_bootstrap(i) < arg.bmin]
-    for clade in short_branch, long_branch, doubt_clade:
-        old_tree.collapse(clade)
+    to_remove = list()
+    for clade in inner_node:
+        if (clade.branch_length < arg.lmin or
+                clade.branch_length > arg.lmax or
+                get_bootstrap(clade) < arg.bmin):
+            to_remove.append(clade)
+    for clade in to_remove:
+        #old_tree.collapse(clade)
         clade.color = 'red'
     p.draw(tree)
     p.write(tree, arg.output, 'newick')
