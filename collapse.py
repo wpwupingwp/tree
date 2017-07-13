@@ -67,7 +67,7 @@ def parse_args():
     arg.add_argument('input', help='input file')
     arg.add_argument('-lmin', type=float, default=0.001,
                      help='minimum branch length')
-    arg.add_argument('-lmax', type=float, default=0.999,
+    arg.add_argument('-lmax', type=float, default=0.500,
                      help='maximum branch length')
     arg.add_argument('-bmin', type=float, default=50.0,
                      help='minimum bootstrap value')
