@@ -48,7 +48,7 @@ def collapse(arg):
         elif get_bootstrap(clade) < arg.bmin:
             clade.color = 'blue'
             to_remove.append(clade)
-    p.write(tree, arg.input+'.color', 'phyloxml')
+    p.write(tree, arg.input+'.xml', 'phyloxml')
     if arg.draw:
         p.draw(tree)
     for clade in to_remove:
