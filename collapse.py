@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 
 import argparse
-import re
 from timeit import default_timer as timer
 from Bio import Phylo as p
 
@@ -25,8 +24,11 @@ def get_bootstrap(clade):
     if clade.confidence is not None:
         bootstrap_value.append(clade.confidence)
     elif clade.name is not None:
-        bootstrap_value.extend(re.split(r'\W', clade.name))
+        bootstrap_value.extend(clade.name.split('/'))
     bootstrap_value = [float(i) for i in bootstrap_value]
+    if len(bootstrap_value) > 2:
+        print(clade)
+        print(bootstrap_value)
     return min(bootstrap_value)
 
 
@@ -43,10 +45,11 @@ def collapse(arg):
             to_remove.append(clade)
     for clade in to_remove:
         clade.color = 'red'
-    p.draw(tree)
+    p.write(tree, arg.input+'.color', 'phyloxml')
+    if arg.draw:
+        p.draw(tree)
     for clade in to_remove:
         tree.collapse(clade)
-    p.draw(tree)
     p.write(tree, arg.output, 'phyloxml')
 
 
@@ -59,6 +62,8 @@ def parse_args():
                      help='maximum branch length')
     arg.add_argument('-bmin', type=float, default=50.0,
                      help='minimum bootstrap value')
+    arg.add_argument('-draw', action='store_true',
+                     help='if set, draw tree')
     arg.add_argument('-o', '--output', help='output file')
     arg.print_help()
     return arg.parse_args()
