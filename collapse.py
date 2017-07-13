@@ -39,12 +39,15 @@ def collapse(arg):
     inner_node = [i for i in inner_node if i.branch_length is not None]
     to_remove = list()
     for clade in inner_node:
-        if (clade.branch_length < arg.lmin or
-                clade.branch_length > arg.lmax or
-                get_bootstrap(clade) < arg.bmin):
+        if clade.branch_length < arg.lmin:
+            clade.color = 'red'
             to_remove.append(clade)
-    for clade in to_remove:
-        clade.color = 'red'
+        elif clade.branch_length > arg.lmax:
+            clade.color = 'green'
+            to_remove.append(clade)
+        elif get_bootstrap(clade) < arg.bmin:
+            clade.color = 'blue'
+            to_remove.append(clade)
     p.write(tree, arg.input+'.color', 'phyloxml')
     if arg.draw:
         p.draw(tree)
