@@ -33,7 +33,7 @@ Parameters:
 
 -     lmin: minimum branch length
 -     lmax: maximum branch length
--    bmin: minimum confidence of the clade
+-     bmin: minimum confidence of the clade
 
 The output contains two files:
 
@@ -41,3 +41,7 @@ The output contains two files:
 -    input.xml       original tree with colored branch that red means short branch, green means long branch, blue means low confidence clade.
 
 It is recommend to use [Archaeopteryx](https://sites.google.com/site/cmzmasek/home/software/archaeopteryx) to view phyloxml format tree file.
+
+## Example
+
+> python3 collapse.py tree.nwk -lmin 0.002 -lmax 0.3 -bin 90 
