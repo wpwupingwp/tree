@@ -18,4 +18,26 @@ This program assumes that your iqtree option is "-alrt -bb", i.e., Ultrafast
 bootstrap value is the second. If you change the order, then you have to
 change option.
 
+# collapse.py
 
+Collapse clade which have too short branch or too long branch or too low
+confidence.
+
+## Usage
+
+> python3 collapse.py input.nwk -lmin 0.001 -lmax 0.5 -bmin 50 -draw
+
+If set "-draw", it will generate picture for you to view interactively.
+
+Parameters:
+
+-     lmin: minimum branch length
+-     lmax: maximum branch length
+-    bmin: minimum confidence of the clade
+
+The output contains two files:
+
+-    input.collapse  collapsed tree as phyloxml format
+-    input.xml       original tree with colored branch that red means short branch, green means long branch, blue means low confidence clade.
+
+It is recommend to use [Archaeopteryx](https://sites.google.com/site/cmzmasek/home/software/archaeopteryx) to view phyloxml format tree file.
