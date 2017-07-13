@@ -31,9 +31,10 @@ def get_bootstrap(clade):
 
 def collapse(arg):
     log = open(arg.input+'.log', 'w')
-    log.write('Clade\tConfidence\tBranchLength\n')
     tree = p.read(arg.input, get_format(arg.input))
     inner_node = tree.get_nonterminals()
+    log.write('The original tree has {} internal '
+              'nodes.\n'.format(len(inner_node)))
     # remove empty
     inner_node = [i for i in inner_node if i.branch_length is not None]
     to_remove = list()
@@ -50,6 +51,10 @@ def collapse(arg):
     p.write(tree, arg.input+'.xml', 'phyloxml')
     if arg.draw:
         p.draw(tree)
+
+    log.write('Collapsed {} internal nodes.\n'.format(len(to_remove)))
+    log.write('Nodes information:\n')
+    log.write('Clade\tConfidence\tBranchLength\n')
     for clade in to_remove:
         log.write('{}\t{}\t{}\n'.format(clade.name, get_bootstrap(clade),
                                         clade.branch_length))
