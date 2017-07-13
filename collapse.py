@@ -26,13 +26,12 @@ def get_bootstrap(clade):
     elif clade.name is not None:
         bootstrap_value.extend(clade.name.split('/'))
     bootstrap_value = [float(i) for i in bootstrap_value]
-    if len(bootstrap_value) > 2:
-        print(clade)
-        print(bootstrap_value)
     return min(bootstrap_value)
 
 
 def collapse(arg):
+    log = open(arg.input+'.log', 'w')
+    log.write('Clade\tConfidence\tBranchLength\n')
     tree = p.read(arg.input, get_format(arg.input))
     inner_node = tree.get_nonterminals()
     # remove empty
@@ -52,6 +51,8 @@ def collapse(arg):
     if arg.draw:
         p.draw(tree)
     for clade in to_remove:
+        log.write('{}\t{}\t{}\n'.format(clade.name, get_bootstrap(clade),
+                                        clade.branch_length))
         tree.collapse(clade)
     p.write(tree, arg.output, 'phyloxml')
 
