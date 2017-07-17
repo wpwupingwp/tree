@@ -26,7 +26,10 @@ def get_bootstrap(clade):
     elif clade.name is not None:
         bootstrap_value.extend(clade.name.split('/'))
     bootstrap_value = [float(i) for i in bootstrap_value]
-    return min(bootstrap_value)
+    if len(bootstrap_value) == 0:
+        return 0
+    else:
+        return min(bootstrap_value)
 
 
 def collapse(arg):
