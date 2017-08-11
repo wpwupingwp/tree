@@ -2,21 +2,7 @@
 
 from Bio import Phylo as p
 from sys import argv
-from matplotlib import pyplot as plt
-from numpy import logspace, log10
-
-
-def get_format(filename):
-    with open(filename, 'r') as raw:
-        line = raw.readline()
-        if line.startswith('#NEXUS'):
-            return 'nexus'
-        elif line.startswith('<phyloxml'):
-            return 'phyloxml'
-        elif line.startswith('('):
-            return 'newick'
-        else:
-            raise ValueError('Unsupport format!')
+from get_format import get_format
 
 
 a = p.read(argv[1], get_format(argv[1]))
