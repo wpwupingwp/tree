@@ -2,6 +2,8 @@
 
 from Bio import Phylo as p
 from sys import argv
+from matplotlib import pyplot as plt
+from numpy import logspace, log10
 
 
 def get_format(filename):
