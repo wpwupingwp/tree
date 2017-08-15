@@ -33,6 +33,12 @@ def get_bootstrap(clade):
 
 
 def collapse(arg):
+    def tree_value():
+        terminal = tree.count_terminals()
+        internal = len(tree.get_nonterminals())
+        log.write('#'*80)
+        log.write('\n{}\t{:.3f}\t{}\t{}\n'.format(arg.input, internal/terminal,
+                                                internal, terminal))
     log = open(arg.input+'.log', 'w')
     tree = p.read(arg.input, get_format(arg.input))
     inner_node = tree.get_nonterminals()
@@ -64,6 +70,11 @@ def collapse(arg):
         tree.collapse(clade)
     p.write(tree, arg.output, 'phyloxml')
 
+    tree_value()
+    log.close()
+
+
+
 
 def parse_args():
     arg = argparse.ArgumentParser()
@@ -77,7 +88,7 @@ def parse_args():
     arg.add_argument('-draw', action='store_true',
                      help='if set, draw tree')
     arg.add_argument('-o', '--output', help='output file')
-    arg.print_help()
+    # arg.print_help()
     return arg.parse_args()
 
 
