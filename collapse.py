@@ -71,7 +71,7 @@ def collapse(arg):
         log.write('#'*80)
         log.write(('\nName\tTree_value\tTree_value_before_collapse\t'
                    'Internal\tTerminal\n'))
-        log.write('\n{}\t{:.3f}\t{:.3f}\t{}\t{}\n'.format(
+        log.write('{}\t{:.3f}\t{:.3f}\t{}\t{}\n'.format(
             arg.input, internal/terminal, old_tree_value, internal, terminal))
     tree_value()
     log.close()
