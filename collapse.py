@@ -33,17 +33,9 @@ def get_bootstrap(clade):
 
 
 def collapse(arg):
-    def tree_value():
-        terminal = tree.count_terminals()
-        internal = len(tree.get_nonterminals())
-        log.write('#'*80)
-        log.write('\n{}\t{:.3f}\t{}\t{}\n'.format(arg.input, internal/terminal,
-                                                internal, terminal))
-    log = open(arg.input+'.log', 'w')
     tree = p.read(arg.input, get_format(arg.input))
     inner_node = tree.get_nonterminals()
-    log.write('The original tree has {} internal '
-              'nodes.\n'.format(len(inner_node)))
+    old_tree_value = len(inner_node) / tree.count_terminals()
     # remove empty
     inner_node = [i for i in inner_node if i.branch_length is not None]
     to_remove = list()
@@ -61,6 +53,9 @@ def collapse(arg):
     if arg.draw:
         p.draw(tree)
 
+    log = open(arg.input+'.log', 'w')
+    log.write('The original tree has {} internal nodes.\n'.format(
+        len(inner_node)))
     log.write('Collapsed {} internal nodes.\n'.format(len(to_remove)))
     log.write('Nodes information:\n')
     log.write('Clade\tConfidence\tBranchLength\n')
@@ -70,6 +65,14 @@ def collapse(arg):
         tree.collapse(clade)
     p.write(tree, arg.output, 'phyloxml')
 
+    def tree_value():
+        terminal = tree.count_terminals()
+        internal = len(tree.get_nonterminals())
+        log.write('#'*80)
+        log.write(('\nName\tTree_value\tTree_value_before_collapse\t'
+                   'Internal\tTerminal\n'))
+        log.write('\n{}\t{:.3f}\t{:.3f}\t{}\t{}\n'.format(
+            arg.input, internal/terminal, old_tree_value, internal, terminal))
     tree_value()
     log.close()
 
