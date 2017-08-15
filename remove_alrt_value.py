@@ -1,20 +1,8 @@
 #!/usr/bin/python3
 
 import argparse
-import os
 import re
 from timeit import default_timer as timer
-
-
-def get_format(filename):
-    with open(filename, 'r') as raw:
-        line = raw.readline()
-        if line.startswith('#NEXUS'):
-            return 'nexus'
-        elif line.startswith('('):
-            return 'newick'
-        else:
-            raise ValueError('Unsupport format!')
 
 
 def remove_alrt(arg):
@@ -39,12 +27,12 @@ def parse_args():
     arg.add_argument('-1', '--alrt', action='store_true',
                      help='keep SH-like alrt value')
     arg.add_argument('-o', '--output', help='output file')
-    arg.print_help()
+    # arg.print_help()
     return arg.parse_args()
 
 
 def main():
-    """docstring
+    """Only support newick format.
     """
     start = timer()
     arg = parse_args()
