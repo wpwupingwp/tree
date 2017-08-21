@@ -82,7 +82,7 @@ def collapse(arg):
 def parse_args():
     arg = argparse.ArgumentParser()
     arg.add_argument('input', help='input file')
-    arg.add_argument('-lmin', type=float, default=0.001,
+    arg.add_argument('-lmin', type=float, default=0,
                      help='minimum branch length')
     arg.add_argument('-lmax', type=float, default=0.500,
                      help='maximum branch length')
