@@ -28,13 +28,15 @@ def main():
                  'SumInternalLength']]
     for tree_file in tree_files:
         clade_info = [['TreeName', 'Length', 'Bootstrap_1', 'Bootstrap_2']]
-        terminal_info = [['TreeName', 'CladeName', 'Type', 'Length']]
+        terminal_info = [['TreeName', 'CladeName', 'Length']]
         tree = p.read(tree_file, get_format(tree_file))
         tree_name = tree_file.split('.')[0]
         t_len = 0
         i_len = 0
         terminals = tree.get_terminals()
         internals = tree.get_nonterminals()
+        # skip the first empty clade
+        internals = internals[1:]
         for terminal in terminals:
             name = terminal.name
             length = terminal.branch_length
@@ -49,8 +51,10 @@ def main():
                           i_len])
         for i in clade_info:
             print(*i, sep='\t')
+        print()
         for i in terminal_info:
             print(*i, sep='\t')
+        print()
     for i in tree_info:
         print(*i, sep='\t')
 
