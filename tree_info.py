@@ -24,7 +24,7 @@ def get_bootstrap(clade):
 
 def main():
     tree_files = argv[1:]
-    tree_info = [['Name', 'Terminals', 'Internals', 'SumBranchLength',
+    tree_info = [['Name', 'Terminals', 'Internals', 'SumTerminalLength',
                  'SumInternalLength']]
     for tree_file in tree_files:
         clade_info = [['TreeName', 'Length', 'Bootstrap_1', 'Bootstrap_2']]
