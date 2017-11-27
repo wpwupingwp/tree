@@ -59,7 +59,6 @@ def main():
         print(*i, sep='\t')
 
 
-
 def draw():
     dot = list()
     zero = list()
