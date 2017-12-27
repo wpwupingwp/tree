@@ -49,12 +49,12 @@ def main():
             clade_info.append([tree_name, length, bootstrap_1, bootstrap_2])
         tree_info.append([tree_name, len(terminals), len(internals), t_len,
                           i_len])
-        for i in clade_info:
-            print(*i, sep='\t')
-        print()
-        for i in terminal_info:
-            print(*i, sep='\t')
-        print()
+        # for i in clade_info:
+        #     print(*i, sep='\t')
+        # print()
+        # for i in terminal_info:
+        #     print(*i, sep='\t')
+        # print()
     for i in tree_info:
         print(*i, sep='\t')
 
