@@ -25,7 +25,7 @@ def get_bootstrap(clade):
 def main():
     tree_files = argv[1:]
     tree_info = [['Name', 'TreeValue', 'Terminals', 'Internals',
-                  'SumTerminalLength', 'SumInternalLength']]
+                  'AvgTerminalLength', 'AvgInternalLength']]
     for tree_file in tree_files:
         clade_info = [['TreeName', 'Length', 'Bootstrap_1', 'Bootstrap_2']]
         terminal_info = [['TreeName', 'CladeName', 'Length']]
@@ -48,7 +48,8 @@ def main():
             bootstrap_1, bootstrap_2, *_ = get_bootstrap(clade)
             clade_info.append([tree_name, length, bootstrap_1, bootstrap_2])
         tree_info.append([tree_name, len(internals)/len(terminals),
-                          len(terminals), len(internals), t_len, i_len])
+                          len(terminals), len(internals), t_len/len(terminals),
+                          i_len/len(terminals)])
         # for i in clade_info:
         #     print(*i, sep='\t')
         # print()
