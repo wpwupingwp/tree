@@ -6,7 +6,8 @@ from sys import argv
 
 tree_file = Path(argv[1])
 sample_info_file = Path(argv[2])
-out = tree_file.with_suffix('.clean')
+tmp = Path('tmp.nwk')
+
 
 def get_dict(sample_info_file) -> dict:
     sample_info = dict()
@@ -48,6 +49,22 @@ for i in raw3.get_leaves():
                                f'Unknown|Unknown|Unknown|{old_name}')
     i.name = new_name
 
-for i in raw, raw2, raw3:
+raw3.write(format=2, outfile=str(tmp))
+# collapse
+raw4 = ete3.PhyloTree(str(tmp))
+raw5 = raw4.copy('deepcopy')
+for i in raw4.get_leaves():
+    if i.name.count("|") != 3:
+        print(i.name)
+raw4.set_species_naming_function(lambda node: node.name.split("|")[0])
+order_tree = raw4.collapse_lineage_specific_expansions()
+raw5.set_species_naming_function(lambda node: node.name.split("|")[1])
+family_tree = raw5.collapse_lineage_specific_expansions()
+order_tree.write(format=2, outfile=str(tree_file.with_suffix('.order_tree')))
+family_tree.write(format=2, outfile=str(tree_file.with_suffix('.family_tree')))
+tmp.unlink()
+#n_trees, n_dups, a=raw.get_speciation_trees()
+#print(n_trees, n_dups)
+print('Raw,Clean,Rename,Order_tree,Family_tree')
+for i in raw, raw2, raw3, raw4, raw5:
     print(len(i.get_leaves()))
-raw3.write(format=2, outfile=str(out))
