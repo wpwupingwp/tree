@@ -16,6 +16,8 @@ def get_dict(sample_info_file) -> dict:
             try:
                 accession, name, order, family = line.rstrip().split(',')
             except Exception:
+                name = order = family = 'Unknown'
+                accession = line.rstrip()
                 print(line)
             new_line = f'{order}|{family}|{name.replace(" ", "_")}|{accession}'
             sample_info[accession] = new_line
@@ -42,7 +44,8 @@ for i in leaves:
 raw3 = raw2.copy('deepcopy')
 for i in raw3.get_leaves():
     old_name = i.name
-    new_name = sample_info.get(get_accession(old_name), 'name_missing')
+    new_name = sample_info.get(get_accession(old_name),
+                               f'Unknown|Unknown|Unknown|{old_name}')
     i.name = new_name
 
 for i in raw, raw2, raw3:
