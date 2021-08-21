@@ -68,6 +68,7 @@ def collapse(old_tree, field_id=0):
 
 
 def main():
+    print('python3 clean_tree.py tree sample_info')
     tree_file = Path(argv[1])
     sample_info_file = Path(argv[2])
     # read tree
