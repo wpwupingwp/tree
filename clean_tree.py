@@ -30,8 +30,11 @@ def reroot(raw_tree,
            outgroup=('Ginkgoales__Ginkgoaceae__Ginkgo__biloba__NC_016986',
                      'Gnetales__Gnetaceae__Gnetum__luofuense__NC_050277')):
     reroot_tree = raw_tree.copy('deepcopy')
-    root = reroot_tree.get_common_ancestor(*outgroup)
-    reroot_tree.set_outgroup(root)
+    try:
+        root = reroot_tree.get_common_ancestor(*outgroup)
+        reroot_tree.set_outgroup(root)
+    except ValueError:
+        print('Outgroups not found!')
     return reroot_tree
 
 
